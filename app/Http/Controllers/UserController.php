@@ -16,7 +16,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function login(UserRequest $request)
+    public function login(Request $request)
     {
         
         $user = User::where('email', $request->email)->first();
