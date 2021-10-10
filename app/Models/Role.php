@@ -16,4 +16,8 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    public function endpoints()
+    {
+        return $this->belongsToMany(Endpoint::class);
+    }
 }

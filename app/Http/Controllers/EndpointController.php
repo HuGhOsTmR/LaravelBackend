@@ -26,7 +26,14 @@ class EndpointController extends Controller
      */
     public function store(EndpointRequest $request)
     {
-        Endpoint::create($request->all());
+        $endpoint = new Endpoint();
+        $endpoint->codendpoint = substr($request->url,8, 2).'00'.(User::count()+1);
+        $endpoint->url = $request->url;
+        $endpoint->description = $request->description;
+        $endpoint->save();
+              
+        $endpoint->roles()->attach($request->roles);
+        
         return response()->json([
             'Message' => 'The new endpoint was successfully saved',
             'State' => 'true'

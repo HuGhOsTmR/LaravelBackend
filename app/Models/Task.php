@@ -14,4 +14,8 @@ class Task extends Model
         'role_id',
         
     ];
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }

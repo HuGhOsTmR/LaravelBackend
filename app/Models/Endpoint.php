@@ -13,4 +13,8 @@ class Endpoint extends Model
         'url',
         'description',        
     ];
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }

@@ -26,7 +26,12 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        Task::create($request->all());
+        $task = new Task();
+        $task->codtask = 'TS'.(Task::count()+1);
+        $task->description = $request->description;
+        $task->save();
+        $task->roles()->attach($request->role);
+
         return response()->json([
             'Message' => 'The new task was successfully saved',
             'State' => 'true'
