@@ -25,7 +25,7 @@ class RoleRequest extends FormRequest
     {
         return [
                 'codrole' => 'required',
-                'description' => 'required|unique:roles, description'
+                'description' => 'required|unique:roles,description'
         ];
     }
 }

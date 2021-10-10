@@ -24,8 +24,8 @@ class EndpointRequest extends FormRequest
     public function rules()
     {
         return [
-            'codendpoint' => 'required',
-            'url' => 'required|unique:endpoints, url',
+            
+            'url' => 'required',
             'description' => 'required'
         ];
     }

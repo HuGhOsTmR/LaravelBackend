@@ -25,7 +25,7 @@ class TaskRequest extends FormRequest
     {
         return [            
             'codtask' => 'required',
-            'description' => 'required|unique:tasks, description',
+            'description' => 'required|unique:tasks,description',
             'role_id'=> 'required'
         ];
     }

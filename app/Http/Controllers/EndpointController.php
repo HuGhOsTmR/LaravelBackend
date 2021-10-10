@@ -27,7 +27,7 @@ class EndpointController extends Controller
     public function store(EndpointRequest $request)
     {
         $endpoint = new Endpoint();
-        $endpoint->codendpoint = substr($request->url,8, 2).'00'.(User::count()+1);
+        $endpoint->codendpoint = substr($request->url,8, 2).'00'.(Endpoint::count()+1);
         $endpoint->url = $request->url;
         $endpoint->description = $request->description;
         $endpoint->save();

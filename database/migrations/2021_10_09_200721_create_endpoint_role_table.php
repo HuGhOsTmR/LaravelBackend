@@ -14,8 +14,7 @@ class CreateEndpointRoleTable extends Migration
     public function up()
     {
         Schema::create('endpoint_role', function (Blueprint $table) {
-            $table->id();
-            $table->string('codendrole')->unique();
+            $table->id();        
             $table->integer('role_id');
             $table->integer('endpoint_id');            
             $table->timestamps();
