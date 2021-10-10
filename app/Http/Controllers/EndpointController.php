@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Endpoint;
+use App\Models\User;
 use App\Http\Requests\EndpointRequest;
 
 class EndpointController extends Controller
@@ -13,8 +14,9 @@ class EndpointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authroles('Rol Administrador');
         return Endpoint::all();
     }
 
@@ -26,6 +28,7 @@ class EndpointController extends Controller
      */
     public function store(EndpointRequest $request)
     {
+        $request->user()->authroles('Rol Administrador');
         $endpoint = new Endpoint();
         $endpoint->codendpoint = substr($request->url,8, 2).'00'.(Endpoint::count()+1);
         $endpoint->url = $request->url;
@@ -46,8 +49,9 @@ class EndpointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Endpoint $endpoint)
+    public function show(Endpoint $endpoint, Request $request)
     {
+        $request->user()->authroles('Rol Administrador');
         return response()->json([
             'Message'=> 'Showing the queried endpoint',
             'Response' => $endpoint
@@ -63,6 +67,7 @@ class EndpointController extends Controller
      */
     public function update(Request $request, Endpoint $endpoint)
     {
+        $request->user()->authroles('Rol Administrador');
         $endpoint->update($request->all());
         return response()->json([
             'Message'=> 'The endpoint was updated',
@@ -76,8 +81,9 @@ class EndpointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Endpoint $endpoint)
+    public function destroy(Endpoint $endpoint, Request $request)
     {
+        $request->user()->authroles('Rol Administrador');
         $endpoint->delete();
         return response()->json([
             'Message'=> 'The endpoint was deleted',

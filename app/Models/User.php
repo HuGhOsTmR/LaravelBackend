@@ -48,4 +48,41 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function hasrole($role){
+        if(this->roles()->where('description',$role)->first()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public function hasanyrole($roles){
+        if (is_array($roles)){
+            foreach ($roles as $role){
+                if(this->hasrole($roles)){
+                    return true;
+                }
+            }
+        }
+        else{
+            if(this->hasrole($roles)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    public function authroles ($roles){
+        if(this->hasanyrole($roles)){
+            return true;
+        }
+        else{
+            return response()->json([
+            'Message'=> 'You don`t have authorization to make this task',
+            'Response' => 'Unauthorized'
+        ]);
+        }
+    }
 }

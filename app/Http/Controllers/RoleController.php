@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\User;
 use App\Http\Requests\RoleRequest;
 
 class RoleController extends Controller
@@ -13,8 +14,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RoleRequest $request)
     {
+        $request->user()->authroles('Rol Administrador');
         return Role::all();
     }
 
@@ -26,6 +28,7 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
+        $request->user()->authroles('Rol Administrador');
         Role::create($request->all());
         return response()->json([
             'Message' => 'The new role was successfully saved',
@@ -39,8 +42,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Role $role, RoleRequest $request)
     {
+        $request->user()->authroles('Rol Administrador');
         return response()->json([
             'Message'=> 'Showing the queried role',
             'Response' => $role
@@ -56,6 +60,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        $request->user()->authroles('Rol Administrador');
         $role->update($request->all());
         return response()->json([
             'Message'=> 'The role was updated',
@@ -69,8 +74,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role, RoleRequest $request)
     {
+        $request->user()->authroles('Rol Administrador');
         $role->delete();
         return response()->json([
             'Message'=> 'The role was deleted',
