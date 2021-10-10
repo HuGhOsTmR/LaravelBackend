@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\HasApiTokens;
 
 class UserController extends Controller
 {
@@ -32,6 +33,15 @@ class UserController extends Controller
             'Response' => $userToken
         ]);
         
+    }
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        
+        return response()->json([
+            'Message'=> 'You are logout',
+            'Response' => 'Goodbye!!!'
+        ]);
     }
 
     public function index()
