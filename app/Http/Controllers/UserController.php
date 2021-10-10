@@ -63,7 +63,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->coduser = substr($request->name,0, 2).'000'.(User::count()+1);
-        $user->save();        
+        $user->save();
+
+        $user->roles()->attach($request->roles); 
         return response()->json([
             'Message' => 'The new user was successfully saved',
             'State' => 'true'

@@ -21,12 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+/* User guess*/
 Route::post('login', [UserController::class, 'login']);
+Route::post('users', [UserController::class, 'store']);
 
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
-    Route::post('logout', [UserController::class, 'logout']);    
+    Route::post('logout', [UserController::class, 'logout']);  
+
     Route::get('endpoints', [EndpointController::class, 'index']);
     Route::get('endpoints/{endpoint}', [EndpointController::class, 'show']);
     Route::post('endpoints', [EndpointController::class, 'store']);
@@ -46,8 +48,7 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
     Route::delete('roles/{role}', [RoleController::class, 'destroy']);
 
     Route::get('users', [UserController::class, 'index']);
-    Route::get('users/{user}', [UserController::class, 'show']);
-    Route::post('users', [UserController::class, 'store']);
+    Route::get('users/{user}', [UserController::class, 'show']);    
     Route::put('users/{user}', [UserController::class, 'update']);
     Route::delete('users/{user}', [UserController::class, 'destroy']);
 });
