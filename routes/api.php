@@ -21,32 +21,33 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('endpoints', [EndpointController::class, 'index']);
-Route::get('endpoints/{endpoint}', [EndpointController::class, 'show']);
-Route::post('endpoints', [EndpointController::class, 'store']);
-Route::put('endpoints/{endpoint}', [EndpointController::class, 'update']);
-Route::delete('endpoints/{endpoint}', [EndpointController::class, 'destroy']);
 
-Route::get('tasks', [TaskController::class, 'index']);
-Route::get('tasks/{task}', [TaskController::class, 'show']);
-Route::post('tasks', [TaskController::class, 'store']);
-Route::put('tasks/{task}', [TaskController::class, 'update']);
-Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
-
-Route::get('roles', [RoleController::class, 'index']);
-Route::get('roles/{role}', [RoleController::class, 'show']);
-Route::post('roles', [RoleController::class, 'store']);
-Route::put('roles/{role}', [RoleController::class, 'update']);
-Route::delete('roles/{role}', [RoleController::class, 'destroy']);
-
-Route::get('users', [UserController::class, 'index']);
-Route::get('users/{user}', [UserController::class, 'show']);
-Route::post('users', [UserController::class, 'store']);
-Route::put('users/{user}', [UserController::class, 'update']);
-Route::delete('users/{user}', [UserController::class, 'destroy']);
 Route::post('login', [UserController::class, 'login']);
 
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
     Route::post('logout', [UserController::class, 'logout']);    
+    Route::get('endpoints', [EndpointController::class, 'index']);
+    Route::get('endpoints/{endpoint}', [EndpointController::class, 'show']);
+    Route::post('endpoints', [EndpointController::class, 'store']);
+    Route::put('endpoints/{endpoint}', [EndpointController::class, 'update']);
+    Route::delete('endpoints/{endpoint}', [EndpointController::class, 'destroy']);
+
+    Route::get('tasks', [TaskController::class, 'index']);
+    Route::get('tasks/{task}', [TaskController::class, 'show']);
+    Route::post('tasks', [TaskController::class, 'store']);
+    Route::put('tasks/{task}', [TaskController::class, 'update']);
+    Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
+
+    Route::get('roles', [RoleController::class, 'index']);
+    Route::get('roles/{role}', [RoleController::class, 'show']);
+    Route::post('roles', [RoleController::class, 'store']);
+    Route::put('roles/{role}', [RoleController::class, 'update']);
+    Route::delete('roles/{role}', [RoleController::class, 'destroy']);
+
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{user}', [UserController::class, 'show']);
+    Route::post('users', [UserController::class, 'store']);
+    Route::put('users/{user}', [UserController::class, 'update']);
+    Route::delete('users/{user}', [UserController::class, 'destroy']);
 });
